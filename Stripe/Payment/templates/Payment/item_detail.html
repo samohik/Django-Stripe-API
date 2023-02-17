@@ -1,0 +1,27 @@
+{% extends 'Payment/base.html' %}
+{% load static %}
+
+{% block content %}
+  <section class="section">
+
+    <div class="product">
+      <div class="description">
+        <h3>{{ item.name }}</h3>
+        <hr />
+        <div>
+          <h5>${{ item.price_usd }}</h5>
+          <form action="{% url 'payment:buy' item.id %}" method="POST">
+            {% csrf_token %}
+            <button class="button is-primary" type="submit">Purchase</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends 'Payment/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <section class="section">
+  {% for item in items %}
+    <div class="product">
+      <div class="description">
+        <h3>{{ item.name }}</h3>
+        <div class="price-item" >
+          <h5>${{ item.price_usd }}</h5>
+        </div>
+        <a class="link-item" href="{% url 'payment:item_detail' item.pk %}">Detail</a>
+      </div>
+    </div>
+  {% endfor %}
+  </section>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

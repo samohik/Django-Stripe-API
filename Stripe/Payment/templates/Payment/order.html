@@ -1,0 +1,34 @@
+{% extends 'Payment/base.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+
+
+{% block content %}
+<div class="order">
+  <section class="section">
+    <div class="product">
+      <div class="description">
+        <h5>Cart name: {{ order.cart_name }}</h5>
+        <h5>Discount: {{ order.discount.percent_off }}%</h5>
+        <h5>Number of items in the cart: {{ order.items.all | length }}</h5>
+
+        {% for item in order.items.all %}
+          Title: {{ item.name }}; Price: ${{ item.price_usd }}<br>
+        {% endfor %}
+
+        <div>
+          <h5>Overall price ${{ order.items_price }}</h5>
+          <form action="{% url 'payment:order' order.id %}" method="POST">
+            {% csrf_token %}
+            <button class="button is-primary" type="submit">Purchase</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
